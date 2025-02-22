@@ -12,5 +12,5 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d '{"content": "<$&@1203519324304838717> This is a test notification from GitHub Actions for rols IDs! 🎉"}' \
+               -d '{"content": "<@&1203519324304838717> This is a test notification from GitHub Actions for rols IDs! 🎉"}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
