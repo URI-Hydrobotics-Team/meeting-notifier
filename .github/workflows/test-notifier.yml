@@ -13,3 +13,4 @@ jobs:
           curl -H "Content-Type: application/json" \
                -X POST \
                -d '{"content": "everyone This is a test notification from GitHub Actions! 🎉"}' \
+               ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
