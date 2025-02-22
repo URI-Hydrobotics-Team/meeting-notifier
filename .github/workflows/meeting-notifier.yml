@@ -15,6 +15,13 @@ on:
     # Day of control meeting (Saturday at 12:00 PM EST) - Every Saturday
     - cron: '0 17 * * 6'
 
+# Server Role IDs
+# Software Team: 1203519324304838717
+# Mechanical Team: 1203520461342900276
+# Electrical Team: 1203520031980527626
+# Outreach Team: 1095433102525989014
+# Website/Video Team: 1339713244952137829
+
 jobs:
   send-general-meetings-reminder:
     runs-on: ubuntu-latest
@@ -38,11 +45,11 @@ jobs:
           run: |
             curl -H "Content-Type: application/json" \
                 -X POST \
-                -d '{"content": "@1203519324304838717 : Controls Meeting tomorrow at 6:00 PM  Don’t miss it!"}' \
+                -d '{"content": "<@&1203519324304838717> : Controls Meeting tomorrow at 6:00 PM  Don’t miss it!"}' \
                 ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
         - name: Send Controls Meeting Reminder Day Of
           run: |
             curl -H "Content-Type: application/json" \
                 -X POST \
-                -d '{"content": "@1203519324304838717 : Controls Meeting today at 6:00 PM. Don’t miss it!"}' \
+                -d '{"content": "<@&1203519324304838717> : Controls Meeting today at 6:00 PM. Don’t miss it!"}' \
                 ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
