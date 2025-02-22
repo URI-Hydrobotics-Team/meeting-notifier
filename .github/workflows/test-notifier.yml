@@ -1,0 +1,15 @@
+name: Test Discord Notifier
+
+on:
+  # This allows the workflow to be triggered manually
+  workflow_dispatch:
+
+jobs:
+  send-test-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Test Discord Notification
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "everyone This is a test notification from GitHub Actions! 🎉"}' \
