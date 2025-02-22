@@ -15,7 +15,7 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d '{"content": "everyone Reminder: General Meeting tomorrow from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
+               -d '{"content": "@everyone, General Meeting tomorrow from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
 
   send-reminder-day-of:
@@ -25,5 +25,5 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d '{"content": "everyone Reminder: General Meeting today from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
+               -d '{"content": "everyone, General Meeting today from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
