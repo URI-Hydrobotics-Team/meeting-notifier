@@ -2,7 +2,7 @@ name: Test Discord Notifier
 
 on: 
   schedule:
-  - cron: '53 3 * * *'
+  - cron: '55 3 * * *'
   
 jobs:
   send-general-meetings-reminder:
@@ -11,6 +11,6 @@ jobs:
     - name: Send Discord Reminder General Meeting
       run: | 
         curl -H "Content-Type: application/json" \
-        -X POST \
-        -d '{"content": "<@&1019044529527066664> This is a scheduled notification test."}' \
-        ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
+          -X POST \
+          -d '{"content": "<@&1019044529527066664> This is a scheduled notification test."}' \
+          ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
