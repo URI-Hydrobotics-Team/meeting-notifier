@@ -2,12 +2,12 @@ name: Test Discord Notifier
 
 on:
   schedule:
-    - cron: '17 10 * * 6'
+    - cron: '22 3 * * 0'
 
 jobs:
   send-general-meetings-reminder:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '17 10 * * 6'
+    if: github.event.schedule == '22 3 * * 0'
     steps:
       - name: Send Discord Reminder General Meeting
         run: |
