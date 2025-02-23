@@ -2,7 +2,7 @@ name: Test Discord Notifier
 
 on: 
   schedule:
-  - cron: '55 3 * * *'
+  - cron: '56 3 * * *'
   
 jobs:
   send-general-meetings-reminder:
