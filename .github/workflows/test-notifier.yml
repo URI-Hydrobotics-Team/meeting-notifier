@@ -2,16 +2,15 @@ name: Test Discord Notifier
 
 on:
   schedule:
-    - cron: '30 3 * * 0'
+    - cron: '37 3 * * 0' # Every Sunday at 3:30 AM UTC
 
 jobs:
   send-general-meetings-reminder:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '30 3 * * 00'
     steps:
       - name: Send Discord Reminder General Meeting
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d '{"content": "$<@&789172352012517427> : This is a scheduled notification test."}' \
+               -d '{"content": "<@&789172352012517427> : This is a scheduled notification test."}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
