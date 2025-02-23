@@ -13,5 +13,5 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d '{"$<@&789172352012517427> content": "everyone : This is a scheduled notification test."}' \
+               -d '{"content": "$<@&789172352012517427> : This is a scheduled notification test."}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
