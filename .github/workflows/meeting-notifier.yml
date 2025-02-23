@@ -1,20 +1,18 @@
 name: General Meeting Reminder
 
 on:
-# General scheduler
   schedule:
-    # cron uses UTC so make sure you -5 hours, use this: https://crontab.cronhub.io to help.
+    # General Meeting
     # 1 day in advance of general meeting (Monday at 12:00 PM EST) - Every other Monday 
     - cron: '0 17 */14 * 1'
     # Day of general meeting (Tuesday at 12:00 PM EST) - Every other Tuesday
     - cron: '0 17 */14 * 2'
-# Controls scheduler
-  schedule:
+    # Controls Meeting
     # 1 day in advance of control meeting (Friday at 12:00 PM EST) - Every Friday
     - cron: '0 17 * * 5'
     # Day of control meeting (Saturday at 12:00 PM EST) - Every Saturday
     - cron: '0 17 * * 6'
-
+    
 # Server Role IDs
 # Software Team: 1203519324304838717
 # Mechanical Team: 1203520461342900276
@@ -25,31 +23,38 @@ on:
 jobs:
   send-general-meetings-reminder:
     runs-on: ubuntu-latest
+    if: github.event.schedule == '0 17 */14 * 1' || github.event.schedule == '0 17 */14 * 2'
     steps:
       - name: Send Discord Reminder General Meeting
+        if: github.event.schedule == '0 17 */14 * 1'
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
                -d '{"content": "@everyone : General Meeting tomorrow from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
       - name: Send Discord Reminder Day Of General Meeting
+        if: github.event.schedule == '0 17 */14 * 2'
         run: |
           curl -H "Content-Type: application/json" \
                -X POST \
                -d '{"content": "@everyone : General Meeting today from 6:30 PM to 8:00 PM at FCAE 040! Don’t miss it!"}' \
                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
+
   send-controls-meeting-reminder:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Send Controls Meeting Reminder
-          run: |
-            curl -H "Content-Type: application/json" \
-                -X POST \
-                -d '{"content": "<@&1203519324304838717> : Controls Meeting tomorrow at 6:00 PM  Don’t miss it!"}' \
-                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
-        - name: Send Controls Meeting Reminder Day Of
-          run: |
-            curl -H "Content-Type: application/json" \
-                -X POST \
-                -d '{"content": "<@&1203519324304838717> : Controls Meeting today at 6:00 PM. Don’t miss it!"}' \
-                ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 17 * * 5' || github.event.schedule == '0 17 * * 6'
+    steps:
+      - name: Send Controls Meeting Reminder
+        if: github.event.schedule == '0 17 * * 5'
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "<@&1203519324304838717> : Controls Meeting tomorrow at 10:00 AM  Don’t miss it!"}' \
+               ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
+      - name: Send Controls Meeting Reminder Day Of
+        if: github.event.schedule == '0 17 * * 6'
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "<@&1203519324304838717> : Controls Meeting today at 10:00 AM. Don’t miss it!"}' \
+               ${{ secrets.ORG_DISCORD_WEBHOOK_URL }}
